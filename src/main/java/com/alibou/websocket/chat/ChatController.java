@@ -27,4 +27,10 @@ public class ChatController {
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;
     }
+    @MessageMapping("/chat.typing")
+    @SendTo("/topic/public")
+    public ChatMessage typing(@Payload ChatMessage chatMessage) {
+        chatMessage.setType(MessageType.TYPING);
+        return chatMessage;
+    }
 }
